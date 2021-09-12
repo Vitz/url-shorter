@@ -17,14 +17,18 @@ from django.contrib import admin
 from django.urls import path, include
 from rest_framework import routers
 
-from .views import UrlView
+from .views import UrlView, ShortUrlView, VisitorsView
 
 router = routers.DefaultRouter()
-router.register('license', UrlView, basename="license")
+router.register('urls', UrlView, basename="ShortUrl")
+router.register('visitors', VisitorsView, basename="visitors")
 
 
 urlpatterns = [
     path('', include(router.urls)),
+    path('short/<str:code>', ShortUrlView.as_view(), name="ShortUrlView"),
+    # path('visitors/', ShortUrlView.as_view(), name="visitors"),
+
     # path('', home),
 
 ]
